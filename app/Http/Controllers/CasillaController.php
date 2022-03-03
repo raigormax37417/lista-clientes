@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Casilla;
 use Illuminate\Http\Request;
+
 class CasillaController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class CasillaController extends Controller
      */
     public function create()
     {
-        //
+      return view('casilla/create');
     }
 
     /**
@@ -36,8 +37,14 @@ class CasillaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+    //print_r($request->all()); 
+      $request->validate([
+        'ubicacion' => 'required|max:100',
+      ]);
+    $data['ubicacion'] = $request->ubicacion;
+    $casilla = Casilla::create($data);
+    return redirect('casilla')->with("success",$casilla->ubicacion."guardado satisfactoriamente ...");
+  }
 
     /**
      * Display the specified resource.
@@ -58,7 +65,9 @@ class CasillaController extends Controller
      */
     public function edit($id)
     {
-      echo "Elemento $id to Edit"; 
+    //echo "Elemento $id to Edit"; 
+      $casilla = Casilla::find($id);
+      return view('casilla/edit', compact('casilla'));
     }
 
     /**
@@ -70,7 +79,13 @@ class CasillaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo "Elemento $id to Update";
+    //echo "Elemento $id to Update";
+      $request->validate([
+        'ubicacion' => 'required|max:100',
+                         ]);
+      $data['ubicacion']=$request->ubicacion;
+      Casilla::whereId($id)->update($data);
+      return redirect('casilla')->with('success', 'Actualizando correctamente...');
     }
 
     /**
@@ -81,6 +96,8 @@ class CasillaController extends Controller
      */
     public function destroy($id)
     {
-        echo "Element $id is destroyed";
+    //  echo "Element $id is destroyed";
+      Casilla::whereId($id)->delete();
+      return redirect('casilla')->with("success", "Registro eliminado....");
     }
 }
