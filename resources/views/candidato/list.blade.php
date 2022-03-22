@@ -31,7 +31,7 @@
             <td>{{$candidato->nombrecompleto}}</td>
             <td>{{$candidato->sexo}}</td>
             <td><img src="/image/{{$candidato->foto}}" width="128px"></td>
-            <td><a href="/pdf/{{$candidato->perfil}}">perfil</td>
+            <td><a target="blanck" href="/pdf/{{$candidato->perfil}}">perfil</a></td>
             <td><a href="{{ route('candidato.edit', $candidato->id)}}"
             class="btn btn-primary">Edit</a></td>
             <td>

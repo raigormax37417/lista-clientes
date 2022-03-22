@@ -16,7 +16,7 @@
     <header>
         <div class="row">
             <div class="col-md-2">
-                <img src="/tecnm_sintexto.svg" width="200px">
+                <img src="https://media.glassdoor.com/sqll/2494896/instituto-tecnológico-nacional-de-méxico-squarelogo-1554785525101.png" width="200px">
             </div>
             <div class="col-md-8 text-center">
                 <h1>Instituto Tecnológico del Valle de Oaxaca</h1>

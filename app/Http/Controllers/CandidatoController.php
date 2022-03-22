@@ -56,7 +56,7 @@ class CandidatoController extends Controller
             $perfil = $request->file('perfil');
             $perfilcandidato = $perfil->getClientOriginalName();
         }
-        $campos=[
+      $campos=[
                 'nombrecompleto' => $request->nombrecompleto,
                 'sexo'           => $request->sexo,
                 'foto'           => $fotocandidato,
@@ -66,7 +66,8 @@ class CandidatoController extends Controller
         if ($request->hasFile('perfil')) $perfil->move(public_path('pdf'), $perfilcandidato);
         //print_r($campos);
         $candidato = Candidato::create($campos);
-        echo $candidato->nombrecompleto . " se guardo correctamente ... ";
+        //echo $candidato->nombrecompleto . " se guardo correctamente ... ";
+        return redirect("candidato");
     }
 
 
@@ -90,7 +91,8 @@ class CandidatoController extends Controller
      */
     public function edit($id)
     {
-        //
+    $candidato = Candidato::find($id);
+    return view('candidato/edit', compact("candidato"));
     }
 
     /**
@@ -102,7 +104,35 @@ class CandidatoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validateData($request);
+
+        $fotoCandidato = "";
+        $perfilCandidato = "";
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $fotoCandidato = $foto->getClientOriginalName();
+        }
+        if ($request->hasFile('perfil')) {
+            $perfil = $request->file('perfil');
+            $perfilCandidato = $perfil->getClientOriginalName();
+        }
+
+        $currentValue = Candidato::find($id);
+        
+        if (empty($fotoCandidato)) $fotoCandidato = $currentValue->foto;
+        if (empty($perfilCandidato)) $perfilCandidato = $currentValue->perfil;
+
+        $campos=[
+                'nombrecompleto' => $request->nombrecompleto,
+                'sexo'           => $request->sexo,
+                'foto'           => $fotoCandidato,
+                'perfil'         => $perfilCandidato,
+        ];
+        if ($request->hasFile('foto')) $foto->move(public_path('image'), $fotoCandidato);
+        if ($request->hasFile('perfil')) $perfil->move(public_path('pdf'), $perfilCandidato);
+
+        Candidato::whereId($id)->update($campos);
+        return redirect('candidato')->with('success', 'Actualizado correctamente...');
     }
 
     /**
@@ -113,6 +143,7 @@ class CandidatoController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Candidato::whereId($id)->delete(); 
+      return redirect('candidato')->with("success", "Registro eliminado....");
     }
 }

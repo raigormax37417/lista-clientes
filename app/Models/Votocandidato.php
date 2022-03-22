@@ -32,7 +32,9 @@ class Votocandidato extends Model
 		'votos' => 'int'
 	];
 
-	protected $fillable = [
+  protected $fillable = [
+    'voto_id',
+    'candidato_id',
 		'votos'
 	];
 
