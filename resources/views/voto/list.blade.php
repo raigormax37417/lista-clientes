@@ -12,8 +12,10 @@
     <thead>
         <tr>
             <td>voto</td>
+            <td>Eleccion</td>
             <td>casilla</td>
             <td>Candidatos y votos</td>
+            <td>Evidencia</td>
             <td colspan="2">ACTION</td>
         </tr>
     </thead>
@@ -21,17 +23,18 @@
         @foreach($votos as $voto)
         <tr>
             <td>{{$voto->id}}</td>
+            <td>{{$voto->eleccion->periodo}}</td>
             <td>{{$voto->casilla->ubicacion}}</td>
             <td>
                 <table>
-                @foreach($voto->candidatos as $candidato)
+                 @foreach($voto->candidatos as $candidato)
                     <tr>
                         <td>{{$candidato->nombrecompleto}} </td>
                         <td><input type="text" readonly 
                         value="{{$candidato->pivot->votos}}"
                         name="candidato_{{$candidato->id}}"  > </td>
                     </tr>
-                @endforeach
+                 @endforeach
                 </table>
             </td>
             <td><a target="blanck" href="/pdf/{{$voto->evidencia}}">Evidencia</a></td>

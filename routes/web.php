@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\EleccionController;
 use App\Http\Controllers\votoController;
+use App\Http\Controllers\FuncionarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::resource('casilla', CasillaController::class);
 Route::resource('candidato', CandidatoController::class);
 Route::resource('eleccion', EleccionController::class);
 Route::resource('voto', votoController::class);
+Route::resource('funcionario', FuncionarioController::class);

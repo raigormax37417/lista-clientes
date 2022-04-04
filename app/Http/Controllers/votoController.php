@@ -16,7 +16,9 @@ class votoController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+*/
+    private $DUPLICATE_KEY_CODE=23000;
+    private $DUPLICATE_KEY_MESSAGE="Ya existe un ID igual en la DB, "."no se permiten duplicados"; 
     public function index()
     {
       $votos = Voto::all();
@@ -84,10 +86,12 @@ class votoController extends Controller
         $success = true;
       } catch (\Exception $e) {
         DB::rollback();
-        $message = $e->getMessage();
-     } 
-      echo $message;
-      return redirect('voto');
+        if($e->getCode()==$this->DUPLICATE_KEY_CODE)
+          $message=$this->DUPLICATE_KEY_MESSAGE;
+        else
+          $message=$e->getMessage();
+     }
+      return view('message', compact('message','success'));
     }
 
     /**
@@ -108,8 +112,9 @@ class votoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    { 
+      $votos = Voto::find($id);
+      return view('voto/edit', compact('votos'));
     }
 
     /**
@@ -121,7 +126,40 @@ class votoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $candidatos=[];
+      foreach($request->all() as $k=>$v) {
+        if(substr($k,0,10)=="candidato_")
+        $candidatos[substr($k,10)]=$v;
+      } 
+      $evidenciaFileName = "";
+      if($request->hasFile('evidencia')) {
+        $evidenciaFileName = $request->file('evidencia')->getClientOriginalName();
+      }
+      if($request->hasFile('evidencia')) $request->file('evidencia')->move(public_path('pdf'), $evidenciaFileName);
+      $voto = Voto::find($id); 
+      $data['id']=$id;
+      $data['casilla_id']=$voto->casilla_id;
+      $data['eleccion_id']=$voto->eleccion_id;
+      $data['evidencia']=$evidenciaFileName;
+      $success=false;
+      $message="Update successful";
+      DB::beginTransaction();
+      try {
+        $voto = Voto::whereId($id)->update($data);
+        
+        foreach($candidatos as $k=>$v) {
+          $votocandidato=[];
+          $votocandidato['votos'] = $v;
+          print_r($votocandidato);
+          Votocandidato::where('voto_id',$id)->where('candidato_id',$k)->update($votocandidato);
+        }
+        DB::commit();
+        $success = true; 
+      } catch (\Exception $e) {
+        DB::rollback();
+          $message=$e->getMessage();
+        } 
+      return view('message', compact('message','success')); 
     }
 
     /**
@@ -132,6 +170,18 @@ class votoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        $success=true;
+        try {
+          
+          Votocandidato::where('voto_id','=',$id)->delete();
+          Voto::whereId($id)->delete();
+          DB::commit();
+          $message="Operacion exitosa";
+        } catch(\Exception $ex) {
+          DB::rollback();
+          $message = $ex->getMessage();
+        }
+        return view('message',compact('message','success'));
     }
 }
