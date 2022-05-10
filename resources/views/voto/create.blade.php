@@ -24,7 +24,7 @@
         
             @csrf 
             <div class="form-group">
-                <label for="eleccion">Eleción:</label>
+                <label for="eleccion">Elección:</label>
                 <select name="eleccion_id" id="eleccion">
                 @foreach ($elecciones as $eleccion)
                     <option value="{{$eleccion->id}}">{{$eleccion->periodo}}</option>

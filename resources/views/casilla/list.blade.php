@@ -11,6 +11,7 @@ margin-top: 40px;
 {{ session()->get('success') }}
   </div><br/>
 @endif
+<a href="{{ route('generatePDF') }}" class="btn btn-success btn-sm">Export PDF</a>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,7 +20,7 @@ margin-top: 40px;
       <td colspan="2">Action</td>
     </tr>
   </thead>
-<tbody>
+<tbody> 
 @foreach($casillas as $casilla)
 <tr>
   <td>{{$casilla->id}}</td>
@@ -32,7 +33,7 @@ margin-top: 40px;
       @csrf
       @method('DELETE')
       <button class="btn btn-danger" type="submit"
-      onclick="return confirm('Esta seguro de borrar {{$casilla->ubicacion}}')" >Del</button>
+      onclick="return confirm('Esta seguro de borrar {{$casilla->ubicacion}}')">Del</button>
     </form>
   </td>
 </tr>

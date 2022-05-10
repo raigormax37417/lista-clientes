@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Casilla;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class CasillaController extends Controller
@@ -52,10 +53,10 @@ class CasillaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+   public function show($id)
+   {
       echo "Element $id"; 
-    }
+   }
 
     /**
      * Show the form for editing the specified resource.
@@ -69,6 +70,14 @@ class CasillaController extends Controller
       $casilla = Casilla::find($id);
       return view('casilla/edit', compact('casilla'));
     }
+      
+    public function generatePDF() 
+    {
+      $casillas = Casilla::all();
+      $pdf = PDF::loadView('casilla/list', ['casillas' => $casillas]);
+      return $pdf->download('casilla.pdf');
+    }
+
 
     /**
      * Update the specified resource in storage.

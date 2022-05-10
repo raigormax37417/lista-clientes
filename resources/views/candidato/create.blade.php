@@ -34,6 +34,8 @@
                     <option value="M">Mujer</option>
                 </select>
             </div>
+            <div class="form-group" id="vista" >
+            </div>
             <div class="form-group">
                 <label for="foto">Foto:</label>
                 <input type="file" id="foto" accept="image/png, image/jpeg" 
@@ -43,6 +45,9 @@
                 <label for="perfil">Perfil:</label>
                 <input type="file" id="perfil" accept="application/pdf"
                  class="form-control" name="perfil" />
+            </div>
+            <div class="form-group" id="img-perfil">
+              <embed id="vista-pdf" type="application/pdf">
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
