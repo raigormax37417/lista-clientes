@@ -73,9 +73,13 @@ class CasillaController extends Controller
       
     public function generatePDF() 
     {
-      $casillas = Casilla::all();
-      $pdf = PDF::loadView('casilla/list', ['casillas' => $casillas]);
-      return $pdf->download('casilla.pdf');
+      /*$casillas = Casilla::all();
+return PDF::loadView('casilla/list', ['casillas' => $casillas])->stream('archivo.pdf'); */
+      
+      $html = "<div style='text-align:center;'><h1>PDF generado desde etiquetas html</h1>
+        <br><h3>&copy;Raigormax</h3> </div>";
+      $pdf = PDF::loadHTML($html);
+      return $pdf->download('archivo.pdf');
     }
 
 

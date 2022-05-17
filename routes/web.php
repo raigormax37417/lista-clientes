@@ -24,6 +24,8 @@ Route::get('/', function () {
     return view('welcome');
            });
 Route::get('casilla/pdf', [CasillaController::class,'generatePDF'])->name('generatePDF');
+Route::get('download',[PDFController::class, 'download'])->name('download');
+Route::get('preview', [PDFController::class, 'preview']);
 Route::resource('casilla', CasillaController::class);
 Route::resource('candidato', CandidatoController::class);
 Route::resource('eleccion', EleccionController::class);
