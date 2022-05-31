@@ -19,22 +19,18 @@ use App\Http\Controllers\PDFController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-           });
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('casilla/pdf', [CasillaController::class,'generatePDF'])->name('generatePDF');
 Route::get('download',[PDFController::class, 'download'])->name('download');
-Route::get('preview', [PDFController::class, 'preview']);
+Route::get('preview', [PDFController::class, 'preview'])->name('preview');
 Route::resource('casilla', CasillaController::class);
 Route::resource('candidato', CandidatoController::class);
 Route::resource('eleccion', EleccionController::class);
 Route::resource('voto', votoController::class);
 Route::resource('funcionario', FuncionarioController::class);
-Route::get('login', [LoginController::class, 'index']);
 Route::get('login/facebook', [LoginController::class, 'redirectToFacebookProvider']);
 Route::get('login/facebook/callback', [LoginController::class,'handleProviderFacebookCallback']);
+Route::get('logout',[LoginController::class, 'logout'])->name('logout');
 Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 Route::middleware(['auth'])->group(function() {
-                                     Route::resource('voto', votoController::class);
-                                   });
+});

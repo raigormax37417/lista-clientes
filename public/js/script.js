@@ -45,16 +45,17 @@ function vistaPDF(p, i, v) {
    let iframe = document.getElementById(v);
    let vista = document.getElementById(i);
     
-   iframe.src = pdfURL;
-   iframe.style.width = "100%";
-   iframe.style.height = "700px";
-   vista.innerHTML = "";
-   vista.append(iframe);
-   console.log(iframe);
    if(totalSize <= 2209715) {
-    } else {
+      iframe.src = pdfURL;
+      iframe.style.width = "100%";
+      iframe.style.height = "700px";
+      vista.innerHTML = "";
+      vista.append(iframe);
+      console.log(iframe);
+   } else {
       alert("El archivo es demasiado grande, tamaño máximo 2mb");
-    }
+      document.querySelector(p).value = ""
+   }
   })
 }
 

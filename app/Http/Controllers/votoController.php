@@ -45,7 +45,10 @@ class votoController extends Controller
       $elecciones = Eleccion::all();
       return view('voto/create', compact('candidatos','casillas','elecciones'));
     }
-
+    public function showData() {
+      $votos = Voto::all();
+      return view('chart/chart', compact('votos'));
+    }
     /**
      * Store a newly created resource in storage.
      *

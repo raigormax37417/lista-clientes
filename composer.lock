@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b3c9f81e094731a7c4aab350cf31158",
+    "content-hash": "d585e5a35fb22674a4563893e7b119b4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2450,25 +2450,25 @@
         },
         {
             "name": "mikehaertl/phpwkhtmltopdf",
-            "version": "2.5.0",
+            "version": "2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mikehaertl/phpwkhtmltopdf.git",
-                "reference": "17ee71341591415d942774eda2c98d8ba7ea9e90"
+                "reference": "0e97c2e1eec918fbcd13f5b4b6c9fa476f99e9db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mikehaertl/phpwkhtmltopdf/zipball/17ee71341591415d942774eda2c98d8ba7ea9e90",
-                "reference": "17ee71341591415d942774eda2c98d8ba7ea9e90",
+                "url": "https://api.github.com/repos/mikehaertl/phpwkhtmltopdf/zipball/0e97c2e1eec918fbcd13f5b4b6c9fa476f99e9db",
+                "reference": "0e97c2e1eec918fbcd13f5b4b6c9fa476f99e9db",
                 "shasum": ""
             },
             "require": {
                 "mikehaertl/php-shellcommand": "^1.5.0",
-                "mikehaertl/php-tmpfile": "^1.2.1",
+                "mikehaertl/php-tmpfile": "^1.1.0",
                 "php": ">=5.0.0"
             },
             "require-dev": {
-                "phpunit/phpunit": ">4.0 <9.4"
+                "phpunit/phpunit": ">4.0 <8"
             },
             "type": "library",
             "autoload": {
@@ -2495,9 +2495,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mikehaertl/phpwkhtmltopdf/issues",
-                "source": "https://github.com/mikehaertl/phpwkhtmltopdf/tree/2.5.0"
+                "source": "https://github.com/mikehaertl/phpwkhtmltopdf/tree/master"
             },
-            "time": "2021-03-01T19:41:06+00:00"
+            "time": "2020-01-07T07:47:15+00:00"
         },
         {
             "name": "monolog/monolog",

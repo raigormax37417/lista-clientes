@@ -15,6 +15,8 @@
   <div class="text-center">
     <a href="{{ route('download') }}">Descargar PDF</a>
 </div>
+@foreach($votos as $voto)
+{{$voto->eleccion->periodo}}
   <script type="text/javascript">
     window.onload = function() {
         google.load("visualization", "1.1", {
@@ -44,4 +46,5 @@
         chart.draw(data, options);
     }
 </script>
+@endforeach
 @endsection
